@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const score = require("./routes/score");
 const connectDB = require("./db/connect");
@@ -8,12 +9,15 @@ const errorHandlerMiddleware = require("./middleware/error-handlers");
 
 app.use(express.json());
 
+// Enable CORS
+app.use(cors());
+
 app.use("/api/v1/score", score);
 
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
