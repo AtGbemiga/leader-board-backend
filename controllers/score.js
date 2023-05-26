@@ -3,13 +3,13 @@ const asyncWrapper = require("../middleware/async");
 const { createCustomError } = require("../errors/custom-error");
 
 const getAllScores = asyncWrapper(async (req, res) => {
-  const scores = await Score.find({});
-  res.status(200).json(scores);
+  const score = await Score.find({});
+  res.status(200).json({ score });
 });
 
 const createScore = asyncWrapper(async (req, res) => {
   const score = await Score.create(req.body);
-  res.status(201).json(score);
+  res.status(201).json({ score });
 });
 
 const getScore = asyncWrapper(async (req, res, next) => {
@@ -18,7 +18,7 @@ const getScore = asyncWrapper(async (req, res, next) => {
   if (!scoreID) {
     return next(createCustomError(`No score with id: ${scoreID}`, 404));
   }
-  res.status(200).json(score);
+  res.status(200).json({ score });
 });
 
 const updateScore = asyncWrapper(async (req, res, next) => {
@@ -30,7 +30,7 @@ const updateScore = asyncWrapper(async (req, res, next) => {
   if (!scoreID) {
     return next(createCustomError(`No score with id: ${scoreID}`, 404));
   }
-  res.status(200).json(score);
+  res.status(200).json({ score });
 });
 
 const deleteScore = asyncWrapper(async (req, res, next) => {
@@ -39,7 +39,7 @@ const deleteScore = asyncWrapper(async (req, res, next) => {
   if (!scoreID) {
     return next(createCustomError(`No score with id: ${scoreID}`, 404));
   }
-  res.status(200).json(score);
+  res.status(200).json({ score });
 });
 
 module.exports = {
