@@ -13,6 +13,10 @@ const ScoreSchema = new mongoose.Schema({
     min: [1, "Must be at least 1"],
     max: [1000, "Can't exceed 1000"],
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Score", ScoreSchema);
